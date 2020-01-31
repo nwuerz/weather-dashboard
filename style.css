@@ -1,3 +1,29 @@
 .navbar {
     justify-content: space-around;
+    color: aliceblue;
+    font-size: larger;
+    font-weight: bold;
+    background-color: black;
+}
+.searchDiv {
+    padding: 10px;
+}
+
+.displayDiv {
+    padding: 20px;
+    padding-top: 10px;
+    background: white;
+}
+
+.currentCityDiv {
+    padding: 10px;
+    background: white;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(211, 209, 209);
+    margin-bottom: 5px;
+}
+
+.forecastDiv {
+    padding: 10pz;
 }
