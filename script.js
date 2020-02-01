@@ -40,10 +40,17 @@ searchBtn.on("click", function () {
     var windSpeed = $("<p>");
     windSpeed.text('Wind Speed: ' + response.wind.speed + ' MPH');
     currentCityDiv.append(windSpeed);
-    //set UV index
+    //make ajax call for uv index
+    var uvUrl =  'https://api.openweathermap.org/data/2.5/uvi/forecast?lat=' + response.coord.lat + '&lon=' + response.coord.lon + '&appid=60d05752da37a46049341d1d3af701da';
+    $.ajax({
+      url: uvUrl,
+      method: "GET",
+    }).then(function(response) {
+      //set UV index
     var uvIndex = $("<p>");
-    // uvIndex.text('UV index: ' + )
-
+    uvIndex.text('UV index: ' + response[0].value);
+    currentCityDiv.append(uvIndex);
+    });
 
   });
 });
