@@ -14,11 +14,14 @@ searchBtn.on("click", function () {
     method: "GET",
   }).then(function(response) {
     console.log(response);
+    //set city name
     var cityName = $("<h5>");
     cityName.text(response.name);
     currentCityDiv.append(cityName);
-
-    var todaysDate = $("<p>");
+    //set todays date
+    var todaysDate = $("<h6>");
+    todaysDate.text(moment().format("dddd, MMMM Do YYYY"));
+    currentCityDiv.append(todaysDate);
     //set icon
     var icon = $("<img>");
     console.log(response.weather[0].icon);
