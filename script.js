@@ -40,6 +40,9 @@ searchBtn.on("click", function () {
     var windSpeed = $("<p>");
     windSpeed.text('Wind Speed: ' + response.wind.speed + ' MPH');
     currentCityDiv.append(windSpeed);
+    //save country code in var to be used in 5 day forecast
+    var countryCode = response.sys.country;
+    //save city name in var to be used in 5 day forecast-----
     //make ajax call for uv index
     var uvUrl =  'https://api.openweathermap.org/data/2.5/uvi/forecast?lat=' + response.coord.lat + '&lon=' + response.coord.lon + '&appid=60d05752da37a46049341d1d3af701da';
     $.ajax({
@@ -47,11 +50,18 @@ searchBtn.on("click", function () {
       method: "GET",
     }).then(function(response) {
       //set UV index
-    var uvIndex = $("<p>");
-    uvIndex.text('UV index: ' + response[0].value);
-    currentCityDiv.append(uvIndex);
-    });
-
+      var uvIndex = $("<p>");
+      uvIndex.text('UV index: ' + response[0].value);
+      currentCityDiv.append(uvIndex);
+      });
+      //make ajax call for 5 day forecast
+      var forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + response.name + ',{' + countryCode + '}'+ '&appid=60d05752da37a46049341d1d3af701da';
+      $.ajax({
+        url: forecastUrl,
+        method: "GET",
+      }).then(function(response) {
+        console.log(response);
+      });
   });
 });
 
