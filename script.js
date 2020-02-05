@@ -60,7 +60,13 @@ searchBtn.on("click", function () {
         url: forecastUrl,
         method: "GET",
       }).then(function(response) {
-        console.log(response);
+        //slice response to obtain only the next 5 days
+        console.log(response.list.slice(0, 5));
+        //store forecast array to a variable
+        var forecastArray = response.list.slice(0, 5);
+        console.log(forecastArray);
+
+
       });
   });
 });
