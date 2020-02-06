@@ -25,5 +25,16 @@
 }
 
 .forecastDiv {
-    padding: 10pz;
+    padding: 10px;
+}
+
+.forecastDayDiv {
+    background:rgb(0,123,255);
+    color: white;
+    margin: 1%;
+    font-size: small;
+}
+
+.forecastDate {
+    font-size: large;
 }

@@ -13,6 +13,9 @@ searchBtn.on("click", function () {
     url: queryURL,
     method: "GET",
   }).then(function(response) {
+    //city city search to local storage
+    localStorage.setItem("city", cityQuery.val());
+    //check for items in local storage and create a button
     console.log(response);
     //set city name
     var cityName = $("<h5>");
@@ -67,34 +70,32 @@ searchBtn.on("click", function () {
         console.log(forecastArray);
         //create an element for each item that we need to display in the forecast array
         for (let i = 0; i < forecastArray.length; i++) {
+          //forecast day div
+          var forecastDayDiv = $("<div>");
+          forecastDayDiv.attr("class", "col-sm-2 forecastDayDiv");
           //date element
+          var todaysDate = moment().add(forecastArray[i]+1, 'days').format('l')
           var forecastDate = $("<p>");
-          forecastDate.text(forecastArray[i].wind.speed);
-          forecastDiv.append(forecastDate);
+          forecastDate.text(todaysDate);
+          forecastDate.attr("class", "forecastDate");
+          forecastDayDiv.append(forecastDate);
           //icon element
           var forecastIcon = $("<img>");
           var forecastIconUrl = 'https://openweathermap.org/img/wn/' + forecastArray[i].weather[0].icon + '@2x.png';
           forecastIcon.attr("src", forecastIconUrl);
-          forecastDiv.append(forecastIcon);
+          forecastDayDiv.append(forecastIcon);
           //temp element
           var forecastTemp = $("<p>");
           forecastTemp.text('Temp: ' + Math.round(((forecastArray[i].main.temp - 273.15) * 1.8) + 32) + "°F");
-          forecastDiv.append(forecastTemp);
+          forecastDayDiv.append(forecastTemp);
           //humidity element
           var forecastHumidity = $("<p>");
           forecastHumidity.text('Humidity: ' + forecastArray[i].main.humidity);
-          forecastDiv.append(forecastHumidity);
+          forecastDayDiv.append(forecastHumidity);
+          //append forcast day div to forecast container
+          forecastDiv.append(forecastDayDiv);
 
         }
-
-
-        
-        //append each element to its div
-
-        // for (let i = 0; i < forecastArray.length; i++) {
-        //   var dayOne = $("<div>");
-        //   dayOne.text()
-        // }
 
       });
   });
