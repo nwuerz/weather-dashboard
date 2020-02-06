@@ -65,7 +65,36 @@ searchBtn.on("click", function () {
         //store forecast array to a variable
         var forecastArray = response.list.slice(0, 5);
         console.log(forecastArray);
+        //create an element for each item that we need to display in the forecast array
+        for (let i = 0; i < forecastArray.length; i++) {
+          //date element
+          var forecastDate = $("<p>");
+          forecastDate.text(forecastArray[i].wind.speed);
+          forecastDiv.append(forecastDate);
+          //icon element
+          var forecastIcon = $("<img>");
+          var forecastIconUrl = 'https://openweathermap.org/img/wn/' + forecastArray[i].weather[0].icon + '@2x.png';
+          forecastIcon.attr("src", forecastIconUrl);
+          forecastDiv.append(forecastIcon);
+          //temp element
+          var forecastTemp = $("<p>");
+          forecastTemp.text('Temp: ' + Math.round(((forecastArray[i].main.temp - 273.15) * 1.8) + 32) + "°F");
+          forecastDiv.append(forecastTemp);
+          //humidity element
+          var forecastHumidity = $("<p>");
+          forecastHumidity.text('Humidity: ' + forecastArray[i].main.humidity);
+          forecastDiv.append(forecastHumidity);
 
+        }
+
+
+        
+        //append each element to its div
+
+        // for (let i = 0; i < forecastArray.length; i++) {
+        //   var dayOne = $("<div>");
+        //   dayOne.text()
+        // }
 
       });
   });
