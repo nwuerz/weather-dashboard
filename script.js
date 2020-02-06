@@ -14,8 +14,12 @@ searchBtn.on("click", function () {
     method: "GET",
   }).then(function(response) {
     //city city search to local storage
-    localStorage.setItem("city", cityQuery.val());
+    localStorage.setItem('city', cityQuery.val());
     //check for items in local storage and create a button
+    var storedCity = localStorage.getItem('city');
+    var cityBtn = $("<button>");
+    cityBtn.text(storedCity);
+    searchDiv.append(cityBtn);
     console.log(response);
     //set city name
     var cityName = $("<h5>");
