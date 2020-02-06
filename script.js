@@ -6,6 +6,16 @@ var cityQuery = $('#cityQuery');
 var currentCityDiv = $('.currentCityDiv');
 var forecastDiv = $('.forecastDiv');
 
+//check for items in local storage and create a button
+var storedCities = localStorage.getItem('city');
+var citiesArr = [];
+citiesArr.push(storedCities);
+for (let i = 0; i < citiesArr.length; i++) {
+  var cityBtn = $("<button>");
+  cityBtn.text(citiesArr[i]);
+  searchDiv.append(cityBtn);
+};
+
 
 searchBtn.on("click", function () {
   var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityQuery.val() + "&appId=60d05752da37a46049341d1d3af701da";
@@ -15,11 +25,7 @@ searchBtn.on("click", function () {
   }).then(function(response) {
     //city city search to local storage
     localStorage.setItem('city', cityQuery.val());
-    //check for items in local storage and create a button
-    var storedCity = localStorage.getItem('city');
-    var cityBtn = $("<button>");
-    cityBtn.text(storedCity);
-    searchDiv.append(cityBtn);
+
     console.log(response);
     //set city name
     var cityName = $("<h5>");
