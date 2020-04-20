@@ -1,3 +1,4 @@
+require("dotenv").config();
 $(document).ready(function () { 
 
 var searchDiv = $('.searchDiv');
@@ -5,6 +6,7 @@ var searchBtn = $('.searchBtn');
 var cityQuery = $('#cityQuery'); 
 var currentCityDiv = $('.currentCityDiv');
 var forecastDiv = $('.forecastDiv');
+var owKey = process.env.ow_key;
 
 //check for items in local storage and create a button
 var storedCities = localStorage.getItem('city');
@@ -22,7 +24,7 @@ cityBtn.on("click", function() {
   //clear any weather info that is being displayed first
   currentCityDiv.html(" ");
   forecastDiv.html(" ");
-  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + storedCities + "&appId=60d05752da37a46049341d1d3af701da";
+  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + storedCities + owKey;
   $.ajax({
     url: queryURL,
     method: "GET",
@@ -61,7 +63,7 @@ cityBtn.on("click", function() {
     var countryCode = response.sys.country;
     //save city name in var to be used in 5 day forecast-----
     //make ajax call for uv index
-    var uvUrl =  'https://api.openweathermap.org/data/2.5/uvi/forecast?lat=' + response.coord.lat + '&lon=' + response.coord.lon + '&appid=60d05752da37a46049341d1d3af701da';
+    var uvUrl =  'https://api.openweathermap.org/data/2.5/uvi/forecast?lat=' + response.coord.lat + '&lon=' + response.coord.lon + owKey;
     $.ajax({
       url: uvUrl,
       method: "GET",
@@ -72,7 +74,7 @@ cityBtn.on("click", function() {
       currentCityDiv.append(uvIndex);
       });
       //make ajax call for 5 day forecast
-      var forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + response.name + ',{' + countryCode + '}'+ '&appid=60d05752da37a46049341d1d3af701da';
+      var forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + response.name + ',{' + countryCode + '}'+ owKey;
       $.ajax({
         url: forecastUrl,
         method: "GET",
@@ -120,7 +122,7 @@ searchBtn.on("click", function () {
   //clear any weather info that is being displayed first
   currentCityDiv.html(" ");
   forecastDiv.html(" ");
-  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityQuery.val() + "&appId=60d05752da37a46049341d1d3af701da";
+  var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityQuery.val() + owKey;
   $.ajax({
     url: queryURL,
     method: "GET",
@@ -159,7 +161,7 @@ searchBtn.on("click", function () {
     var countryCode = response.sys.country;
     //save city name in var to be used in 5 day forecast-----
     //make ajax call for uv index
-    var uvUrl =  'https://api.openweathermap.org/data/2.5/uvi/forecast?lat=' + response.coord.lat + '&lon=' + response.coord.lon + '&appid=60d05752da37a46049341d1d3af701da';
+    var uvUrl =  'https://api.openweathermap.org/data/2.5/uvi/forecast?lat=' + response.coord.lat + '&lon=' + response.coord.lon + owKey;
     $.ajax({
       url: uvUrl,
       method: "GET",
@@ -170,7 +172,7 @@ searchBtn.on("click", function () {
       currentCityDiv.append(uvIndex);
       });
       //make ajax call for 5 day forecast
-      var forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + response.name + ',{' + countryCode + '}'+ '&appid=60d05752da37a46049341d1d3af701da';
+      var forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?q=' + response.name + ',{' + countryCode + '}'+ owKey;
       $.ajax({
         url: forecastUrl,
         method: "GET",
