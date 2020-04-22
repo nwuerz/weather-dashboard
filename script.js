@@ -1,4 +1,3 @@
-require("dotenv").config();
 $(document).ready(function () { 
 
 var searchDiv = $('.searchDiv');
@@ -6,7 +5,8 @@ var searchBtn = $('.searchBtn');
 var cityQuery = $('#cityQuery'); 
 var currentCityDiv = $('.currentCityDiv');
 var forecastDiv = $('.forecastDiv');
-var owKey = process.env.ow_key;
+var owKey = "&appid=4eaac462bbd16db163a982fa95b94625";
+
 
 //check for items in local storage and create a button
 var storedCities = localStorage.getItem('city');
